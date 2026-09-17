@@ -91,6 +91,15 @@ public class QuizQuestionActivity extends AppCompatActivity {
         // 問題を表示
         if (questions != null && !questions.isEmpty()) {
             displayQuestion(currentQuestionIndex);
+        } else {
+            // 問題が1問もない問題集を開くと、何も起きない画面で止まってしまうため、
+            // 理由を伝えて前の画面に戻す
+            if (countDownTimer != null) {
+                countDownTimer.cancel();
+                countDownTimer = null;
+            }
+            Toast.makeText(this, R.string.no_questions_available, Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 

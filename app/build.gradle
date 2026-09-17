@@ -22,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -39,6 +44,12 @@ dependencies {
     //JLatex
     implementation 'ru.noties:jlatexmath-android:0.2.0'
     testImplementation 'junit:junit:4.13.2'
+    // ユニットテストでは android.jar の org.json がスタブ（呼ぶと例外）になるため、
+    // 実装を持つ org.json を差し込んで JSON の解析をテストできるようにする
+    testImplementation 'org.json:json:20231013'
+    // 端末やエミュレータなしで SQLite・assets を含む処理をテストする
+    testImplementation 'org.robolectric:robolectric:4.11.1'
+    testImplementation 'androidx.test:core:1.5.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

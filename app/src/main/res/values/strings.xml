@@ -11,4 +11,7 @@
     <string name="column_tab_name">tabName</string> <!-- 選択されたタブ名 -->
     <string name="column_button_id">buttonId</string>　<!-- 選択されたボタンID -->
     <string name="column_timestamp">timestamps</string> <!-- 各レコードがいつ追加されたかを記録するためのカラム(列) -->
+
+    <!-- 画面表示用の文字列 -->
+    <string name="no_questions_available">この問題集にはまだ問題が登録されていません。</string>
 </resources>
