@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#95CCFF</color>
+    <color name="white">#FFFFFF</color> <!-- 白 -->
+    <color name="black">#000000</color><!-- 黒 -->
+    <color name="button_background_default">#E1F5FE</color> <!-- ボタンのデフォルト背景色 -->
+    <color name="button_text_default">#0000FF</color> <!-- ボタンのテキストデフォルト、タブの選択時 -->
+    <color name="button_background_pressed">#B5E7FF</color>　<!-- ボタンがクリックされたときの背景色 -->
+    <color name="button_text_pressed">#8C8C8C</color>　<!-- ボタンがクリックされた時-->
+    <color name="tabIndicatorColor">#C71585</color> <!-- タブのインディケーターの色-->
+    <color name="light_green">#70C1B3</color> <!-- 結果画面の正答数表示 -->
+    <color name="abc">#01579B</color>
+    <color name="correct_answer_text">#FF0000</color> <!-- 正解時にボタンのテキスト色が変わる時用 -->
+</resources>

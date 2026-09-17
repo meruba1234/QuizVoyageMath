@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">QuizVoyageMath</string>
+
+    <!-- 時間に余裕があれば、文字列リソースはString.xmlで管理する！ -->
+    <!-- データベース関連の文字列リソース -->
+    <string name="database_name">Statistics.db</string>
+    <string name="table_name">statistics</string> <!-- テーブル名 -->
+    <string name="column_id">id</string>
+    <string name="column_time_taken">timeTaken</string> <!-- 経過時間 -->
+    <string name="column_correct_answers">correctAnswers</string> <!-- 正答数 -->
+    <string name="column_tab_name">tabName</string> <!-- 選択されたタブ名 -->
+    <string name="column_button_id">buttonId</string>　<!-- 選択されたボタンID -->
+    <string name="column_timestamp">timestamps</string> <!-- 各レコードがいつ追加されたかを記録するためのカラム(列) -->
+</resources>

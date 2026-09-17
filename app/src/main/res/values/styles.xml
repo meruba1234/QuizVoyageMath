@@ -1,0 +1,16 @@
+<!-- res/values/styles.xml -->
+<resources>
+    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_rounded</item>
+        <item name="backgroundTint">#E1F5FE</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/button_text_color</item>
+    </style>
+    <style name="PointTVStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_rounded</item>
+        <item name="backgroundTint">#80E1F5FE</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/button_text_color</item>
+    </style>
+</resources>
+<!-- ボタンのテキストカラーはクリックしているか否かで変わります。 -->

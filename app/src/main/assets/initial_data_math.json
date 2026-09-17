@@ -1,0 +1,577 @@
+{
+  "tabs": [
+    {
+      "name": "複素数平面",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "複素数平面の基本",
+          "questions": [
+            {
+              "question": "複素数 $z = 3 + 4i$ の絶対値を求めよ。",
+              "choices": [
+                "$5$",
+                "$7$",
+                "$12$",
+                "$25$"
+              ],
+              "correct_answer": 0
+            },
+            {
+              "question": "複素数 $z = 1 - i$ の共役複素数を求めよ。",
+              "choices": [
+                "$1 + i$",
+                "$-1 + i$",
+                "$1 - i$",
+                "$-1 - i$"
+              ],
+              "correct_answer": 0
+            },
+            {
+              "question": "原点から複素数 $z = -4 + 3i$ までの距離を求めよ。",
+              "choices": [
+                "$5$",
+                "$7$",
+                "$12$",
+                "$25$"
+              ],
+              "correct_answer": 1
+            }
+          ]
+        },
+        {
+          "id": "button2",
+          "title": "複素数の演算",
+          "questions": [
+            {
+              "question": "複素数 $z = 1 + i$ と $w = 2 - 3i$ の和を求めよ。",
+              "choices": [
+                "$3 - 2i$",
+                "$3 + 2i$",
+                "$-1 + 4i$",
+                "$1 - 4i$"
+              ],
+              "correct_answer": 0
+            },
+            {
+              "question": "複素数 $z = 2i$ と $w = -1 + i$ の積を求めよ。",
+              "choices": [
+                "$2 + 2i$",
+                "$-2 + 2i$",
+                "$-2 - 2i$",
+                "$2 - 2i$"
+              ],
+              "correct_answer": 1
+            },
+            {
+              "question": "複素数 $z = 3 + 4i$ の逆数を求めよ。",
+              "choices": [
+                "$\\frac{3}{25} - \\frac{4}{25}i$",
+                "$\\frac{4}{25} + \\frac{3}{25}i$",
+                "$-\\frac{3}{25} + \\frac{4}{25}i$",
+                "$-\\frac{4}{25} - \\frac{3}{25}i$"
+              ],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button3",
+          "title": "複素数関数",
+          "questions": [
+            {
+              "question": "複素数 $z$ に対して、関数 $f(z) = z^2$ が実数となるのは $z$ が何のときか。",
+              "choices": [
+                "実数のとき",
+                "純虚数のとき",
+                "実部と虚部が等しいとき",
+                "実部と虚部が互いに逆数関係にあるとき"
+              ],
+              "correct_answer": 0
+            },
+            {
+              "question": "複素数 $z = x + yi$ （$x, y$ は実数）に対して、$f(z) = |z|^2 - \\bar{z}$ を計算せよ。",
+              "choices": [
+                "$x^2 + y^2 - x - yi$",
+                "$x^2 + y^2 - x + yi$",
+                "$x^2 + y^2 + x - yi$",
+                "$x^2 + y^2 + x + yi$"
+              ],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button4",
+          "title": "複素数と幾何",
+          "questions": [
+            {
+              "question": "複素数平面上で、点 $z = 1 + i$ を原点中心に $90^\\circ$ 回転させた点はどこか。",
+              "choices": [
+                "$-1 + i$",
+                "$-i + 1$",
+                "$i - 1$",
+                "$1 - i$"
+              ],
+              "correct_answer": 2
+            },
+            {
+              "question": "複素数平面上の2点 $z_1 = 2 + 2i$ と $z_2 = -2 + 2i$ を結ぶ線分の中点の座標は。",
+              "choices": [
+                "$0 + 2i$",
+                "$2 + 0i$",
+                "$-2 + 0i$",
+                "$0 - 2i$"
+              ],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button5",
+          "title": "ベクトル",
+          "questions": [
+            {
+              "question": "平面上に点A$(1, 3)$、点B$(4, -2)$があります。\\\\ 点Oを原点としたとき、\\\\ベクトル$\\vec{OA}$とベクトル$\\vec{OB}$のなす角$\\theta$を求めなさい。\\\\ ただし、$\\cos^{-1}(x)$は$x$の逆余弦を表すものとします。",
+              "choices": [
+                "$\\cos^{-1}\\left(\\frac{1}{5}\\right)$",
+                "$\\cos^{-1}\\left(\\frac{2}{5}\\right)$",
+                "$\\cos^{-1}\\left(\\frac{11}{\\sqrt{170}}\\right)$",
+                "$\\cos^{-1}\\left(\\frac{11}{\\sqrt{34}}\\right)$"
+              ],
+              "correct_answer": 2
+            }
+          ]
+        },
+        {
+          "id": "button6",
+          "title": "極限と三角関数",
+          "questions": [
+            {
+              "question": "次の極限値を求めなさい。\n\\[\n\\lim_{x \\to 0} \\frac{\\sin(2x)}{x}\n\\]",
+              "choices": ["0", "1", "2", "$\\frac{1}{2}$"],
+              "correct_answer": 2
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "英単語",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "アルコール",
+          "questions": [
+            {
+              "question": "アルコール+の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button2",
+          "title": "アルコールの融点と沸点",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button3",
+          "title": "アルコールとエーテル",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button4",
+          "title": "アルコール2",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button5",
+          "title": "アルコール3",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button6",
+          "title": "エーテル",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button7",
+          "title": "アルデヒド",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button8",
+          "title": "アルデヒド2",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button9",
+          "title": "ケトンとヨードホルム反応",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button10",
+          "title": "診断テスト:アルコール",
+          "questions": [
+            {
+              "question": "分子の形が、直鎖形、枝分かれ型、球形の有機化合物の異性体について、「対称性」の高い順に並べると、",
+              "choices": ["球形＞直鎖形＞枝分かれ形", "２", "３", "４"],
+              "correct_answer": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "油脂・セッケン",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "油脂と脂肪酸",
+          "questions": [
+            {
+              "question": "グリセリンは(　)",
+              "choices": ["不正炭素原子を持たない", "不正炭素原子を持つ", "3価のカルボン酸である", "2価のアルコールである"],
+              "correct_answer": 0
+            },
+            {
+              "question": "油脂に水酸化ナトリウム水溶液を加えて加熱すると(　)が起こる。",
+              "choices": ["加水分解", "脱水反応", "中和反応", "エステル化"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button2",
+          "title": "油脂の分類",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button3",
+          "title": "セッケン1",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button4",
+          "title": "セッケン2",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button5",
+          "title": "けん化、ヨウ素との反応",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button6",
+          "title": "けん化、ヨウ素との反応",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button7",
+          "title": "けん化価とヨウ素価2",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button8",
+          "title": "けん化価とヨウ素価3",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button9",
+          "title": "油脂・セッケンのまとめ",
+          "questions": [
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "問題文",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        },
+        {
+          "id": "button10",
+          "title": "油脂・セッケンのまとめ2",
+          "questions": [
+            {
+              "question": "",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            },
+            {
+              "question": "",
+              "choices": ["1", "2", "3", "4"],
+              "correct_answer": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "積分法",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "特殊な置換積分",
+          "questions": [
+            {
+              "question": "次の不定積分を求めよ。\\[\n\\int \\frac{dx}{\\sqrt{1 - x^2}}\n\\])",
+              "choices": ["\\(\\sin^{-1}(x) + C\\)",
+                "\\(\\cos^{-1}(x) + C\\)",
+                "\\(\\tan^{-1}(x) + C\\)",
+                "\\(-\\cos^{-1}(x) + C\\)"
+              ],
+              "correct_answer": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "芳香族1",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "芳香族2",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "人間生活",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "代謝",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "神経と効果器",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "植物の環境応答",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "生態系",
+      "buttons": [
+        {
+          "id": "button1",
+          "title": "ボタン1のタイトル",
+          "questions": [
+            {
+              "question": "炭化水素の問題文1",
+              "choices": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
+              "correct_answer": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

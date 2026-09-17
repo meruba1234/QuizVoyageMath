@@ -1,0 +1,1 @@
+-keep class io.nano.tex.** {*;}

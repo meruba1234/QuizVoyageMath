@@ -1,0 +1,54 @@
+<!-- quiz_results_activity.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tvButtonNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="buttunの成績表" />
+
+    <TextView
+        android:id="@+id/tvTimeTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="経過時間: 00:00"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvCorrectAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="正解数: 0"
+        android:textSize="18sp" />
+
+    <!-- 統計データを表示するためのLineChart -->
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/combinedChart"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        android:layout_marginTop="16dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <!-- メイン画面に戻るボタン -->
+        <Button
+            android:id="@+id/buttonToMain"
+            style="@style/CustomButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:text="To Main Screen" />
+    </RelativeLayout>
+</LinearLayout>
