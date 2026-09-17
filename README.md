@@ -108,6 +108,7 @@ export JAVA_HOME=/path/to/jdk-17
 | `DatabaseHelper.insertInitialData()` が `initial_data_math.json` を JSON 配列として読もうとしていた（実際のファイルはトップレベルが `{"tabs": [...]}` のオブジェクト）。例外はログ出力だけで握りつぶされていた | `quiz_questions` テーブルが空のままになり、**検索が常に0件を返していた** |
 | `DatabaseHelper.onUpgrade()` がテーブルを DROP した後に再作成していなかった | DB バージョンを上げた時点でテーブルが失われる |
 | 問題文が未記入の設問がそのまま出題・登録対象になっていた | 空欄の問題が表示される |
+| `SearchActivity.performSearch()` が同じ検索を2回実行していた。検索履歴（`searchHistory`）は宣言だけで一度も追加されず、`itemsToShow` も画面に反映されない死んだコードだった | 無駄なクエリ。検索履歴が機能していなかった |
 
 ### 残っている問題
 
@@ -115,7 +116,6 @@ export JAVA_HOME=/path/to/jdk-17
 |------|------|
 | 「油脂・セッケンのまとめ2」に、問題文が未記入の設問が2問ある | この問題集は出題対象が0問になる（開くとメッセージを表示して戻る） |
 | 選択肢ボタンが LaTeX 表示に未対応 | 数式を含む選択肢がそのままの文字列で表示される |
-| `SearchActivity.performSearch()` が同じ検索を2回実行している。検索履歴（`searchHistory`）は宣言だけで一度も追加されない | 無駄なクエリ。検索履歴機能は未実装 |
 
 ---
 
@@ -129,6 +129,7 @@ export JAVA_HOME=/path/to/jdk-17
 
 - `QuizDataParsingTest` — 同梱データをアプリの読み取りロジックで解釈できるか
 - `DatabaseHelperTest` — Robolectric で実際の SQLite を動かし、初期データの投入と検索を検証
+- `SearchHistoryTest` — 検索履歴の並び・重複排除・件数制限・永続化を検証
 
 上の「検索が常に0件」の不具合は、修正前のコードに対して `DatabaseHelperTest` を実行すると
 検索結果0件で失敗することを確認しています（修正後は49件）。
