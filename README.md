@@ -18,10 +18,8 @@
 | 問題データ | `assets/initial_data.json` | `assets/initial_data_math.json` |
 | 問題文の表示 | `TextView#setText` | `JLatexMathView#setLatex`（[jlatexmath-android](https://github.com/noties/jlatexmath-android) 0.2.0） |
 
-選択肢ボタンは LaTeX 表示に対応しておらず、`TextView` のままです
-（コード中にも「選択ボタンにもLatexで表示されるように改変中」というコメントが残っています）。
-
-同梱データ51問のうち、LaTeX 記法を含むのは6問です。
+問題文・選択肢のどちらも、内容に応じて表示方法を切り替えています
+（[数式の表示方針](#数式の表示方針) を参照）。
 
 ---
 
@@ -108,6 +106,8 @@ export JAVA_HOME=/path/to/jdk-17
 | `DatabaseHelper.insertInitialData()` が `initial_data_math.json` を JSON 配列として読もうとしていた（実際のファイルはトップレベルが `{"tabs": [...]}` のオブジェクト）。例外はログ出力だけで握りつぶされていた | `quiz_questions` テーブルが空のままになり、**検索が常に0件を返していた** |
 | `DatabaseHelper.onUpgrade()` がテーブルを DROP した後に再作成していなかった | DB バージョンを上げた時点でテーブルが失われる |
 | 問題文が未記入の設問がそのまま出題・登録対象になっていた | 空欄の問題が表示される |
+| 日本語を含む問題文まで JLaTeXMath に流していた。JLaTeXMath は日本語のグリフを持たないため、文字が描画されず消えていた | **日本語だけの問題文が画面に表示されない**（同梱データでは大半が該当）。「終わり！」の表示も同様 |
+| 選択肢ボタンが数式表示に未対応だった | 数式を含む選択肢が LaTeX のソースのまま表示される |
 | `SearchActivity.performSearch()` が同じ検索を2回実行していた。検索履歴（`searchHistory`）は宣言だけで一度も追加されず、`itemsToShow` も画面に反映されない死んだコードだった | 無駄なクエリ。検索履歴が機能していなかった |
 
 ### 残っている問題
@@ -115,7 +115,24 @@ export JAVA_HOME=/path/to/jdk-17
 | 内容 | 影響 |
 |------|------|
 | 「油脂・セッケンのまとめ2」に、問題文が未記入の設問が2問ある | この問題集は出題対象が0問になる（開くとメッセージを表示して戻る） |
-| 選択肢ボタンが LaTeX 表示に未対応 | 数式を含む選択肢がそのままの文字列で表示される |
+
+---
+
+## 数式の表示方針
+
+JLaTeXMath は日本語のグリフを持たないため、日本語を数式として描画すると
+文字が消えてしまいます（文字数を増やしても描画幅が変わらないことを
+`LatexRenderingTest` で確認しています）。
+
+そのため `MathText#isRenderableMath` で次のように振り分けています。
+
+| 内容 | 表示方法 |
+|------|----------|
+| 日本語を含まない純粋な数式（例: `$\frac{3}{25} - \frac{4}{25}i$`） | `JLatexMathView` / ボタンの画像として描画 |
+| 上記以外（日本語を含む文章、数式記法のない文字列） | 通常の `TextView` / ボタンの文字 |
+
+同梱データでは、問題文と選択肢あわせて245要素のうち45要素が数式として描画され、
+残りは通常のテキストとして表示されます。
 
 ---
 
@@ -130,6 +147,8 @@ export JAVA_HOME=/path/to/jdk-17
 - `QuizDataParsingTest` — 同梱データをアプリの読み取りロジックで解釈できるか
 - `DatabaseHelperTest` — Robolectric で実際の SQLite を動かし、初期データの投入と検索を検証
 - `SearchHistoryTest` — 検索履歴の並び・重複排除・件数制限・永続化を検証
+- `MathTextTest` — 数式として描画すべきかの判定を検証
+- `LatexRenderingTest` — 日本語が描画されない前提の確認と、同梱データの振り分け
 
 上の「検索が常に0件」の不具合は、修正前のコードに対して `DatabaseHelperTest` を実行すると
 検索結果0件で失敗することを確認しています（修正後は49件）。

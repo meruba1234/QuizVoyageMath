@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.List;
 
+import ru.noties.jlatexmath.JLatexMathDrawable;
 import ru.noties.jlatexmath.JLatexMathView;
 
 // 4択問題画面に遷移後のアクティビティを管理するクラス
@@ -103,6 +104,46 @@ public class QuizQuestionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 問題文を表示する。
+     *
+     * <p>JLaTeXMath は日本語を描画できないため、日本語を含む文章は通常の
+     * TextView に、日本語を含まない純粋な数式だけ JLatexMathView に流す。
+     */
+    private void showQuestionText(String text) {
+        JLatexMathView questionMathView = findViewById(R.id.questionMathView);
+        TextView questionTextView = findViewById(R.id.questionTextView);
+
+        if (MathText.isRenderableMath(text)) {
+            questionMathView.setLatex(text);
+            questionMathView.setVisibility(View.VISIBLE);
+            questionTextView.setVisibility(View.GONE);
+        } else {
+            questionTextView.setText(text);
+            questionTextView.setVisibility(View.VISIBLE);
+            questionMathView.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 選択肢をボタンに表示する。
+     *
+     * <p>純粋な数式のときは描画した数式をボタンの画像として設定する。
+     * それ以外は従来どおり文字として表示する。
+     */
+    private void showChoiceText(Button button, String text) {
+        if (MathText.isRenderableMath(text)) {
+            JLatexMathDrawable drawable = JLatexMathDrawable.builder(text)
+                    .textSize(button.getTextSize())
+                    .build();
+            button.setText("");
+            button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+        } else {
+            button.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            button.setText(text);
+        }
+    }
+
     // 特定の問題を表示するメソッド
     private void displayQuestion(int index) {
         Data_Quiz currentQuestion = questions.get(index);
@@ -111,13 +152,11 @@ public class QuizQuestionActivity extends AppCompatActivity {
         currentQuestion.shuffleChoices();
 
         // 問題のデータを画面に設定
-        JLatexMathView questionMathView = findViewById(R.id.questionMathView);
-        questionMathView.setLatex(currentQuestion.getQuestion());
+        showQuestionText(currentQuestion.getQuestion());
 
         for (int i = 0; i < choiceButtonId.length; i++) {
-            // 選択ボタンにもLatexで表示されるように改変中
             Button choiceButton = findViewById(choiceButtonId[i]);
-            choiceButton.setText(currentQuestion.getChoices().get(i));
+            showChoiceText(choiceButton, currentQuestion.getChoices().get(i));
             changeButtonColor(choiceButton, true);// ボタンの背景色をリセット
 
             int finalI = i;
@@ -264,8 +303,7 @@ public class QuizQuestionActivity extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
-        JLatexMathView questionMathView = findViewById(R.id.questionMathView);
-        questionMathView.setLatex("終わり！");
+        showQuestionText("終わり！");
         // タイマーの終了と結果画面への遷移
         long timeTaken = System.currentTimeMillis() - startTime;
         showResults(timeTaken, correctAnswers, totalQuestions);
