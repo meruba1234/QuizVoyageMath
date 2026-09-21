@@ -69,18 +69,17 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             String buttonId = "button" + (i + 1); // ボタンIDを生成（例: button1, button2）
 
             // ボタンデータマップから対応するデータを取得
-            if (buttonDataMap.containsKey(buttonId)) {
-                Data_Button quizData = buttonDataMap.get(buttonId);
+            Data_Button quizData = buttonDataMap.get(buttonId);
+            if (quizData != null) {
+                button.setVisibility(View.VISIBLE);
                 button.setText(quizData.getButtonTitle()); // ボタンにタイトルを設定
 
                 // QuizDataから問題リストを取得
                 List<Data_Quiz> questions = quizData.getQuestions();
 
-                // ボタンのテキストを設定
-                button.setText(quizData.getButtonTitle());
                 // ボタンにリスナーを設定
                 button.setOnClickListener(v -> {
-                    if (0 < questions.size()) { // if文の条件文は突破して、中に入っている。
+                    if (0 < questions.size()) {
                         // メイン画面のボタンが押されたら、questionsリスト内のData_Quizオブジェクトの順序をランダムに並べ替える
                         Collections.shuffle(questions);
                         // 問題リストとボタンタイトルを渡して、アクティビティを開始する。
@@ -88,12 +87,18 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
                     } else {
                         // 問題リストが空だったら、トースト表示する。
-                        Toast.makeText(context, "もう一度最初から開始します", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.no_questions_available, Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
-                // 対応するデータがない場合はボタンを非表示にする
-                //button.setVisibility(View.GONE);
+                // このタブに対応する問題集がないボタン。
+                // 後始末をしないと、レイアウトの仮の文字（"22" など）が残り、
+                // ページが使い回されたときには別のタブのタイトルとリスナーが
+                // そのまま残って、無関係な問題集が開いてしまう。
+                // 位置がずれないよう、GONE ではなく INVISIBLE で隠す。
+                button.setText("");
+                button.setOnClickListener(null);
+                button.setVisibility(View.INVISIBLE);
             }
         }
     }
