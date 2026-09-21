@@ -29,6 +29,9 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class QuizResultsActivity extends AppCompatActivity {
+
+    private StatisticsDbHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,8 @@ public class QuizResultsActivity extends AppCompatActivity {
         String buttonId = getIntent().getStringExtra("BUTTON_ID");
         String tabName = getIntent().getStringExtra("TAB_NAME");
         String selectedButtonTitle = getIntent().getStringExtra("SELECTED_BUTTON_TITLE");
+
+        dbHelper = new StatisticsDbHelper(this);
 
         // 経過時間を分と秒に変換
         long minutes = TimeUnit.MILLISECONDS.toMinutes(timeTaken);
@@ -77,16 +82,14 @@ public class QuizResultsActivity extends AppCompatActivity {
 
     // 統計データの保存
     public void saveStatistics(int timeTaken, int correctAnswers, String buttonId, String tabName) {
-        StatisticsDbHelper dbHelper = new StatisticsDbHelper(this);
         dbHelper.addStatistics(timeTaken, correctAnswers, buttonId, tabName);
     }
 
     // 統計データの取得とグラフの作成
     public void showStatisticsGraphForButton(String buttonId, String tabName, int totalQuestions) {
-        // StatisticsDbHelperを使用して、特定のボタンとタブに対する統計データをデータベースから取得
-        StatisticsDbHelper dbHelper = new StatisticsDbHelper(this);
-        // 最新の10件のデータを取得するためのクエリを実行
-        Cursor cursor = dbHelper.getStatisticsForButtonAndTab(buttonId, tabName, 10);
+        // 特定のボタンとタブに対する統計データを、最新の10件だけ取得する
+        Cursor cursor = dbHelper.getStatisticsForButtonAndTab(
+                buttonId, tabName, StatisticsDbHelper.MAX_RECORDS_PER_QUIZ);
 
         // 経過時間と正答数を格納するためのリストを初期化
         List<Entry> timeEntries = new ArrayList<>(); // 経過時間用のリスト
@@ -177,5 +180,13 @@ public class QuizResultsActivity extends AppCompatActivity {
         leftAxis.setEnabled(true);
 
         combinedChart.invalidate(); // グラフを更新
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
+        super.onDestroy();
     }
 }

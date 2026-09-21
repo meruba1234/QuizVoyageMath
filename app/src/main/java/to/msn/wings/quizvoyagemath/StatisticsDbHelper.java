@@ -9,6 +9,8 @@ import android.util.Log;
 
 /*--- ユーザーの学習情報統計 ---*/
 public class StatisticsDbHelper extends SQLiteOpenHelper {
+    private static final String TAG = "StatisticsDbHelper";
+
     private static final String DATABASE_NAME = "Statistics.db";// データベース名
     private static final int DATABASE_VERSION = 2;
 
@@ -19,6 +21,9 @@ public class StatisticsDbHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TAB_NAME = "tabName"; //選択されたタブ名
     private static final String COLUMN_BUTTON_ID = "buttonId"; //選択されたボタンID
     private static final String COLUMN_TIMESTAMP = "timestamps"; //各レコードがいつ追加されたかを記録するためのカラム(列)
+
+    /** 1つの問題集あたりに残す成績の件数 */
+    static final int MAX_RECORDS_PER_QUIZ = 10;
 
     //コンストラクタ
     public StatisticsDbHelper(Context context) {
@@ -50,22 +55,31 @@ public class StatisticsDbHelper extends SQLiteOpenHelper {
     //クイズ完了時に統計データを挿入
     public void addStatistics(int timeTaken, int correctAnswers, String buttonId, String tabName) {
         SQLiteDatabase db = this.getWritableDatabase();
+        String[] quizArgs = new String[]{buttonId, tabName};
 
-        // 既存のレコード数をチェック
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME, null);
+        // この問題集の既存レコード数をチェックする。
+        // テーブル全体を対象にすると、他の問題集を解いただけで
+        // この問題集の履歴が押し出されて消えてしまう。
         int count = 0;
-        if (cursor.moveToFirst()) {
-            count = cursor.getInt(0);
+        try (Cursor cursor = db.rawQuery(
+                "SELECT COUNT(*) FROM " + TABLE_NAME
+                        + " WHERE " + COLUMN_BUTTON_ID + " = ? AND " + COLUMN_TAB_NAME + " = ?",
+                quizArgs)) {
+            if (cursor.moveToFirst()) {
+                count = cursor.getInt(0);
+            }
         }
-        cursor.close();
-        // レコード数が10を超えていれば、最も古いレコードを削除
-        if (count >= 10) {
-            db.execSQL("DELETE FROM " + TABLE_NAME + " " +
-                    "WHERE " + COLUMN_ID +
-                    " IN (SELECT " + COLUMN_ID +
-                        " FROM " + TABLE_NAME +
-                        " ORDER BY " + COLUMN_TIMESTAMP +
-                        " ASC LIMIT " + (count - 9) + ")");
+
+        // 上限に達していれば、この問題集の最も古いレコードから削除する。
+        // タイムスタンプは秒単位で同着しうるため、並び順には id を使う。
+        if (count >= MAX_RECORDS_PER_QUIZ) {
+            int excess = count - (MAX_RECORDS_PER_QUIZ - 1);
+            db.execSQL("DELETE FROM " + TABLE_NAME
+                            + " WHERE " + COLUMN_ID + " IN ("
+                            + "SELECT " + COLUMN_ID + " FROM " + TABLE_NAME
+                            + " WHERE " + COLUMN_BUTTON_ID + " = ? AND " + COLUMN_TAB_NAME + " = ?"
+                            + " ORDER BY " + COLUMN_ID + " ASC LIMIT ?)",
+                    new Object[]{buttonId, tabName, excess});
         }
 
         // 新しい統計データを挿入
@@ -75,16 +89,11 @@ public class StatisticsDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_BUTTON_ID, buttonId); // 選択されたボタンID
         values.put(COLUMN_TAB_NAME, tabName); // 選択されたタブ名
 
-        try {
-            db.insert(TABLE_NAME, null, values);
-        } catch (Exception e) {
-            // 例外が発生した場合の処理
-            Log.e("Database", "Error while adding statistics", e);
-        } finally {
-            if (db != null) {
-                db.close();
-            }
+        if (db.insert(TABLE_NAME, null, values) == -1) {
+            Log.e(TAG, "成績の保存に失敗しました。");
         }
+        // db はヘルパーが管理するのでここでは閉じない。
+        // 閉じると、同じヘルパーを使っている他の処理の Cursor が無効になる。
     }
 
     // tabNameとbuttonIdに基づいて統計データを取得するメソッド
@@ -96,8 +105,10 @@ public class StatisticsDbHelper extends SQLiteOpenHelper {
                 " WHERE " + COLUMN_BUTTON_ID + " = ? AND " + COLUMN_TAB_NAME + " = ?" +
                 // COLUMN_BUTTON_IDと COLUMN_TAB_NAMEという2つのカラムに基づいて、フィルターをかけるための条件を設定
                 // ?はプレースホルダーと呼ぶ。
-                " ORDER BY " + COLUMN_TIMESTAMP + " ASC" +
-                " LIMIT " + limit; // 最新のデータから順にlimit件分取得する
+                // 新しい方から limit 件を取り出し、グラフ用に古い順へ並べ直す。
+                // タイムスタンプは秒単位で同着しうるため、並び順には id を使う。
+                " ORDER BY " + COLUMN_ID + " DESC LIMIT " + limit;
+        rawQuery = "SELECT * FROM (" + rawQuery + ") ORDER BY " + COLUMN_ID + " ASC";
 
         // selectionArgs配列を用意して、SQLインジェクションを防ぐ
         String[] selectionArgs = new String[] { buttonId, tabName };
